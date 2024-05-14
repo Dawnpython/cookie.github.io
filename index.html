@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Печенье с предсказаниями</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: linear-gradient(135deg, #f0c27b, #4b1248);
+            font-family: 'Arial', sans-serif;
+        }
+        .container {
+            text-align: center;
+            max-width: 500px;
+            width: 90%;
+        }
+        .cookie {
+            width: 100%;
+            max-width: 200px;
+            cursor: pointer;
+            transition: transform 0.5s ease-in-out;
+        }
+        .cookie.open {
+            transform: scale(1.2) rotateY(180deg);
+        }
+        .prediction {
+            margin-top: 20px;
+            font-size: 1.2em;
+            color: #fff;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+        .prediction.show {
+            opacity: 1;
+        }
+        .repeat-btn {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 1em;
+            color: #fff;
+            background-color: #4b1248;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            display: none;
+        }
+        .repeat-btn.show {
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="cok1.png" alt="Печенье с предсказанием" class="cookie" id="cookie">
+        <div class="prediction" id="prediction"></div>
+        <button class="repeat-btn" id="repeatBtn">Назад</button>
+    </div>
+
+    <script>
+        const predictions = [
+            "Сегодня вас ждет удача!",
+            "Вы найдете решение старой проблемы.",
+            "Вас ждет приятный сюрприз.",
+            "Скоро вы получите хорошие новости.",
+            "Будьте открыты новым возможностям.",
+            "Успех будет на вашей стороне.",
+            "Скоро вы встретите старого друга.",
+            "Ваши усилия будут вознаграждены."
+        ];
+
+        const cookie = document.getElementById('cookie');
+        const predictionDiv = document.getElementById('prediction');
+        const repeatBtn = document.getElementById('repeatBtn');
+
+        cookie.addEventListener('click', function() {
+            const randomIndex = Math.floor(Math.random() * predictions.length);
+            const predictionText = predictions[randomIndex];
+
+            cookie.src = 'cok2.png';
+            cookie.classList.add('open');
+            setTimeout(() => {
+                predictionDiv.textContent = predictionText;
+                predictionDiv.classList.add('show');
+                repeatBtn.classList.add('show');
+            }, 500);
+        });
+
+        repeatBtn.addEventListener('click', function() {
+            // cookie.src = 'cok1.png';
+            // cookie.classList.remove('open');
+            // predictionDiv.classList.remove('show');
+            // repeatBtn.classList.remove('show');
+            // predictionDiv.textContent = '';
+
+            // // Закрытие webapp Telegram
+            // if (window.Telegram && Telegram.WebApp) {
+                Telegram.WebApp.close();
+            }
+        )
+    </script>
+</body>
+</html>
